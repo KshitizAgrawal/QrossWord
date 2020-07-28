@@ -1,6 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayoutHomepage1"
+        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:background="@color/black">
+
+        <ImageButton
+            android:id="@+id/imgbtnHomepageLeftPane"
+            android:layout_width="60sp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:contentDescription="button for left pane list view"
+            android:scaleType="fitXY"
+            android:src="@drawable/button_listview" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@+id/imgbtnHomepageLeftPane"
+            android:text="QrossWord"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutHomepage2"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/relativeLayoutHomepage1">
+
+        <Button
+            android:id="@+id/btnHomepageFeatured"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:text="Featured"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:background="@color/black"/>
+
+        <Button
+            android:id="@+id/btnHomepageStatistics"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:text="Statistics"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:background="@color/black"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/btnHomepageFeatured"
+            android:layout_toStartOf="@id/btnHomepageStatistics"
+            android:text="Packs"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:background="@color/black"/>
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutHomepage1"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/relativeLayoutHomepage2">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutHomepage3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageButton
+                android:id="@+id/imgbtnDailyCW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:contentDescription="button for daily crossword"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/imgbtnDailyCW"
+                android:layout_centerVertical="true"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="Journey to Europe"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutHomepage3"
+            app:layout_constraintBottom_toTopOf="@+id/btn3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn2"/>
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutHomepage3"
+            app:layout_constraintBottom_toTopOf="@+id/btn4"
+            app:layout_constraintStart_toEndOf="@+id/btn1"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/btn1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn4"/>
+
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/btn2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn3"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutHomepage2"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/relativeLayoutHomepage2"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lightBlue"
+        android:visibility="invisible" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Coming Soon"
+            android:textSize="48sp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutHomepage3"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/relativeLayoutHomepage2"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black"
+        android:visibility="invisible" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Coming Soon"
+            android:textSize="48sp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

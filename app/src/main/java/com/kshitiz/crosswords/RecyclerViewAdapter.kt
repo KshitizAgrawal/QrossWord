@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kshitiz.crosswords.Data
 import com.kshitiz.crosswords.R
 
-class RecyclerViewAdapter(context: Context, list: ArrayList<Data>) :
+class RecyclerViewAdapter(val context: Context, var list: ArrayList<Data>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -15,8 +15,8 @@ class RecyclerViewAdapter(context: Context, list: ArrayList<Data>) :
         const val VIEW_TYPE_TWO = 2
     }
 
-    private val context: Context = context
-    var list: ArrayList<Data> = list
+//    val context: Context = context
+//    var list: ArrayList<Data> = list
 
     private inner class View1ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
@@ -52,7 +52,7 @@ class RecyclerViewAdapter(context: Context, list: ArrayList<Data>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (list[position].viewType === VIEW_TYPE_ONE) {
+        if (list[position].viewType == VIEW_TYPE_ONE) {
             (holder as View1ViewHolder).bind(position)
         } else {
             (holder as View2ViewHolder).bind(position)
