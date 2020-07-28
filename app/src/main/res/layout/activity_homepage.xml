@@ -61,6 +61,7 @@
             android:background="@color/black"/>
 
         <Button
+            android:id="@+id/btnHomepagePacks"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_toEndOf="@id/btnHomepageFeatured"
@@ -95,7 +96,9 @@
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
                 android:contentDescription="button for daily crossword"
-                android:scaleType="fitXY"/>
+                android:src="@drawable/img_crossword_mini"
+                android:scaleType="fitXY"
+                android:background="@color/white"/>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -110,41 +113,53 @@
 
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/btn1"
+        <ImageButton
+            android:id="@+id/imgbtnFreePack1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayoutHomepage3"
-            app:layout_constraintBottom_toTopOf="@+id/btn3"
+            app:layout_constraintBottom_toTopOf="@+id/imgbtnFreePack3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn2"/>
+            app:layout_constraintEnd_toStartOf="@+id/imgbtnFreePack2"
+            android:contentDescription="Special free pack 1"
+            android:src="@drawable/img_cw_freepack1"
+            android:background="@color/white"/>
 
-        <Button
-            android:id="@+id/btn2"
+        <ImageButton
+            android:id="@+id/imgbtnFreePack2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayoutHomepage3"
-            app:layout_constraintBottom_toTopOf="@+id/btn4"
-            app:layout_constraintStart_toEndOf="@+id/btn1"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/imgbtnFreePack4"
+            app:layout_constraintStart_toEndOf="@+id/imgbtnFreePack1"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="Special free pack 2"
+            android:src="@drawable/img_cw_freepack2"
+            android:background="@color/white"/>
 
-        <Button
-            android:id="@+id/btn3"
+        <ImageButton
+            android:id="@+id/imgbtnFreePack3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/btn1"
+            app:layout_constraintTop_toBottomOf="@+id/imgbtnFreePack1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn4"/>
+            app:layout_constraintEnd_toStartOf="@+id/imgbtnFreePack4"
+            android:contentDescription="Special free pack 3"
+            android:src="@drawable/img_cw_freepack3"
+            android:background="@color/white"/>
 
-        <Button
-            android:id="@+id/btn4"
+        <ImageButton
+            android:id="@+id/imgbtnFreePack4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/btn2"
+            app:layout_constraintTop_toBottomOf="@+id/imgbtnFreePack2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn3"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/imgbtnFreePack3"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="Special free pack 4"
+            android:src="@drawable/img_cw_freepack4"
+            android:background="@color/white"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,7 +188,7 @@
         android:layout_height="fill_parent"
         android:layout_below="@id/relativeLayoutHomepage2"
         android:layout_alignParentBottom="true"
-        android:background="@color/black"
+        android:background="@color/colorPrimary"
         android:visibility="invisible" >
         <TextView
             android:layout_width="wrap_content"

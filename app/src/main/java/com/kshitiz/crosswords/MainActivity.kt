@@ -51,8 +51,7 @@ class MainActivity : AppCompatActivity() {
                 //works from the second click onwards
                 editText.setOnClickListener(View.OnClickListener {
                     highlightLine(i, characters)
-                    Toast.makeText(applicationContext, "On click EditText", Toast.LENGTH_LONG)
-                        .show()
+                    Toast.makeText(applicationContext, "On click EditText", Toast.LENGTH_LONG).show()
                 })
                 editText.onFocusChangeListener =
                     OnFocusChangeListener { view, hasFocus ->
