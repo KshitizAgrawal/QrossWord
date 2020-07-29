@@ -16,9 +16,9 @@ class CrossWordSeriesActivity : AppCompatActivity() {
 
         val dataList = ArrayList<Data>()
 
-        for(i in 1 until 13) {
+        for(i in 1 until 8) {
             val viewType = i%2
-            dataList.add(Data(viewType, "QrossWord {}".format(i)))
+            dataList.add(Data(viewType, "QrossWord ()".format(i)))
         }
 
         val adapter = RecyclerViewAdapter(this, dataList)
@@ -26,4 +26,5 @@ class CrossWordSeriesActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
     }
+
 }

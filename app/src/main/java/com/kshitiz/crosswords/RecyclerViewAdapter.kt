@@ -1,10 +1,13 @@
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kshitiz.crosswords.Data
+import com.kshitiz.crosswords.MainActivity
 import com.kshitiz.crosswords.R
 
 class RecyclerViewAdapter(val context: Context, var list: ArrayList<Data>) :
@@ -15,24 +18,25 @@ class RecyclerViewAdapter(val context: Context, var list: ArrayList<Data>) :
         const val VIEW_TYPE_TWO = 2
     }
 
-//    val context: Context = context
-//    var list: ArrayList<Data> = list
-
     private inner class View1ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var message: TextView = itemView.findViewById(R.id.textView)
+        var imgbtn: ImageButton = itemView.findViewById(R.id.imageButton)
         fun bind(position: Int) {
             val recyclerViewModel = list[position]
             message.text = recyclerViewModel.textData
+            imgbtn.setOnClickListener{changeActivity()}
         }
     }
 
     private inner class View2ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var message: TextView = itemView.findViewById(R.id.textView)
+        var imgbtn: ImageButton = itemView.findViewById(R.id.imageButton)
         fun bind(position: Int) {
             val recyclerViewModel = list[position]
             message.text = recyclerViewModel.textData
+            imgbtn.setOnClickListener{changeActivity()}
         }
     }
 
@@ -61,5 +65,13 @@ class RecyclerViewAdapter(val context: Context, var list: ArrayList<Data>) :
 
     override fun getItemViewType(position: Int): Int {
         return list[position].viewType
+    }
+
+    /*
+    change to another activity on button click
+ */
+    private fun changeActivity() {
+        val intent = Intent(context, MainActivity::class.java)
+        context.startActivity(intent)
     }
 }
