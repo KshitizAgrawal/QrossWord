@@ -10,10 +10,11 @@
     android:paddingBottom="16dp"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.20"/>
+        android:layout_weight="0.20">
+    </RelativeLayout>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
 
             <EditText
                 android:id="@+id/editText0"
-                style="@style/cw_editbox" />
+                style="@style/cw_editbox"/>
             <EditText
                 android:id="@+id/editText1"
                 style="@style/cw_editbox"/>
@@ -132,17 +133,229 @@
 
     </TableLayout>
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.40">
+        android:layout_weight="0.30">
 
         <TextView
             android:id="@+id/textViewHint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Question Appear Here"
             android:textAlignment="center"
             android:textSize="26sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textStyle="bold"
+            android:background="@color/lightBlue"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.33">
+
+            <Button
+                android:id="@+id/btnKeyA"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="A"/>
+
+            <Button
+                android:id="@+id/btnKeyB"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="B"/>
+
+            <Button
+                android:id="@+id/btnKeyC"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="C"/>
+
+            <Button
+                android:id="@+id/btnKeyD"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="D"/>
+
+            <Button
+                android:id="@+id/btnKeyE"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="E"/>
+
+            <Button
+                android:id="@+id/btnKeyF"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="F"/>
+
+            <Button
+                android:id="@+id/btnKeyG"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="G"/>
+
+            <Button
+                android:id="@+id/btnKeyH"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="H"/>
+
+            <Button
+                android:id="@+id/btnKeyI"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="I"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.33">
+
+            <Button
+                android:id="@+id/btnKeyJ"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="J"/>
+
+            <Button
+                android:id="@+id/btnKeyK"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="K"/>
+
+            <Button
+                android:id="@+id/btnKeyL"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="L"/>
+
+            <Button
+                android:id="@+id/btnKeyM"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="M"/>
+
+            <Button
+                android:id="@+id/btnKeyN"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="N"/>
+
+            <Button
+                android:id="@+id/btnKeyO"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="O"/>
+
+            <Button
+                android:id="@+id/btnKeyP"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="P"/>
+
+            <Button
+                android:id="@+id/btnKeyQ"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="Q"/>
+
+            <Button
+                android:id="@+id/btnKeyR"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="R"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.33">
+
+            <Button
+                android:id="@+id/btnKeyS"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="S"/>
+
+            <Button
+                android:id="@+id/btnKeyT"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="T"/>
+
+            <Button
+                android:id="@+id/btnKeyU"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="U"/>
+
+            <Button
+                android:id="@+id/btnKeyV"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="V"/>
+
+            <Button
+                android:id="@+id/btnKeyW"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="W"/>
+
+            <Button
+                android:id="@+id/btnKeyX"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="X"/>
+
+            <Button
+                android:id="@+id/btnKeyY"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="Y"/>
+
+            <Button
+                android:id="@+id/btnKeyZ"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.11"
+                android:text="Z"/>
+
+            <Button
+                android:id="@+id/btnKeyDEL"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.17"
+                android:text="DEL"/>
+
+        </TableRow>
+
+    </TableLayout>
 </LinearLayout>

@@ -25,7 +25,7 @@ class RecyclerViewAdapter(val context: Context, var list: ArrayList<Data>) :
         fun bind(position: Int) {
             val recyclerViewModel = list[position]
             message.text = recyclerViewModel.textData
-            imgbtn.setOnClickListener{changeActivity()}
+            imgbtn.setOnClickListener{changeActivity(position)}
         }
     }
 
@@ -36,7 +36,7 @@ class RecyclerViewAdapter(val context: Context, var list: ArrayList<Data>) :
         fun bind(position: Int) {
             val recyclerViewModel = list[position]
             message.text = recyclerViewModel.textData
-            imgbtn.setOnClickListener{changeActivity()}
+            imgbtn.setOnClickListener{changeActivity(position)}
         }
     }
 
@@ -70,8 +70,18 @@ class RecyclerViewAdapter(val context: Context, var list: ArrayList<Data>) :
     /*
     change to another activity on button click
  */
-    private fun changeActivity() {
+    private fun changeActivity(position: Int) {
         val intent = Intent(context, MainActivity::class.java)
+        when(position) {
+            0-> {intent.putExtra("boardName", R.xml.tourist1)}
+            1-> {intent.putExtra("boardName", R.xml.tourist2)}
+            2-> {intent.putExtra("boardName", R.xml.tourist3)}
+            3-> {intent.putExtra("boardName", R.xml.tourist4)}
+            4-> {intent.putExtra("boardName", R.xml.tourist5)}
+            5-> {intent.putExtra("boardName", R.xml.tourist6)}
+            6-> {intent.putExtra("boardName", R.xml.tourist7)}
+            else-> {intent.putExtra("boardName", R.xml.crosswords)}
+        }
         context.startActivity(intent)
     }
 }

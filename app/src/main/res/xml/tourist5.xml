@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<crossword>
+    <across>
+        <text>"OPAL"</text>
+        <hint>"tourist 5"</hint>
+    </across>
+    <across>
+        <text>"DECAF"</text>
+        <hint>"tourist 5"</hint>
+    </across>
+    <across>
+        <text>"EATME"</text>
+        <hint>"tourist 5"</hint>
+    </across>
+    <across>
+        <text>"RUBY"</text>
+        <hint>"tourist 5"</hint>
+    </across>
+    <across>
+        <text>"LPS"</text>
+        <hint>"tourist 5"</hint>
+    </across>
+    <down>
+        <text>"ODE"</text>
+        <hint>"tourist 5"</hint>
+    </down>
+    <down>
+        <text>"PEARL"</text>
+        <hint>"tourist 5"</hint>
+    </down>
+    <down>
+        <text>"ACTUP"</text>
+        <hint>"tourist 5"</hint>
+    </down>
+    <down>
+        <text>"LAMBS"</text>
+        <hint>"tourist 5"</hint>
+    </down>
+    <down>
+        <text>"FEY"</text>
+        <hint>"tourist 5"</hint>
+    </down>
+    <character>O</character>
+    <character>P</character>
+    <character>A</character>
+    <character>L</character>
+    <character>""</character>
+    <character>D</character>
+    <character>E</character>
+    <character>C</character>
+    <character>A</character>
+    <character>F</character>
+    <character>E</character>
+    <character>A</character>
+    <character>T</character>
+    <character>M</character>
+    <character>E</character>
+    <character>""</character>
+    <character>R</character>
+    <character>U</character>
+    <character>B</character>
+    <character>Y</character>
+    <character>""</character>
+    <character>L</character>
+    <character>P</character>
+    <character>S</character>
+    <character>""</character>
+</crossword>

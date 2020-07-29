@@ -1,33 +1,38 @@
 package com.kshitiz.crosswords
 
-import android.app.Dialog
-import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.Toast
-import org.xmlpull.v1.XmlPullParser
-import java.lang.Exception
 import android.view.View.OnFocusChangeListener
-import android.text.InputType
-import android.widget.TextView
+import android.widget.*
+import java.lang.Exception
+import org.xmlpull.v1.XmlPullParser
+
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var activeBox: Int = 0
+    private lateinit var myDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        makeCrossword()
-        setboard()
-        highlightBox()
-//        revealAll()
-//        checkBoardComplete()
+        try {
+            loadCrossword(intent.getIntExtra("boardName", R.xml.crosswords))
+            setupBoard()
+            setupPopupGO()
+        } catch(ex: Exception) {
+            Log.e("MainActivity", "Unable to Start Activity")
+        }
     }
 
     /*
@@ -35,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         Highlight whole vertical or horizontal line
         No listener for black boxes
      */
-    fun highlightBox() {
+    fun setupBoard() {
         try {
 
             val characters = Crossword.getCharacters()
@@ -43,8 +48,11 @@ class MainActivity : AppCompatActivity() {
             for(i in 0 until 25) {
                 val editText = findViewById<EditText>(getResourceId("editText"+i))
 
+                editText.inputType = InputType.TYPE_NULL
+
                 if(characters[i] == "") {
-                    editText.inputType = InputType.TYPE_NULL
+                    val color = resources.getColor(R.color.black)
+                    editText.setBackgroundColor(color)
                     continue
                 }
 
@@ -63,8 +71,7 @@ class MainActivity : AppCompatActivity() {
                             if (orientation == "down") Crossword.setOrientation("across") else Crossword.setOrientation("down")
                             highlightLine(i, characters)
 
-//                            Toast.makeText(applicationContext, "Got the focus", Toast.LENGTH_LONG)
-//                                .show()
+                            activeBox = i
                         } else {
                             Toast.makeText(applicationContext, "Lost the focus", Toast.LENGTH_LONG)
                                 .show()
@@ -81,9 +88,11 @@ class MainActivity : AppCompatActivity() {
                     override fun afterTextChanged(p0: Editable?) {
 //                        Toast.makeText(applicationContext,"executed after change made over EditText",Toast.LENGTH_SHORT).show()
                         if(checkBoardComplete()) showPopup()
+                        checkWord()
                     }
                 })
             }
+            setOnClickListeners()
         }catch (ex: Exception) {
             Log.e("highlightColor", ex.printStackTrace().toString())
         }
@@ -142,19 +151,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
+        highlight line after complete
+     */
+
+    fun highlightLineComplete() {
+        val activeCells = Crossword.getActiveCells()
+        for (cell in activeCells) {
+            val editText = findViewById<EditText>(getResourceId("editText$cell"))
+            if(editText.text.toString() != "") {
+                TODO("put complete symbol on background of each cell of the line. Create that symbol")
+            }
+        }
+        Toast.makeText(applicationContext,"This word is correct",Toast.LENGTH_SHORT).show()
+    }
+
+    /*
         Parse xml crossword
         create crossword object from parsed xml crossword
      */
-    fun makeCrossword() {
-
-        var words = ArrayList<String>()
-        var hints = ArrayList<String>()
-        var characters = ArrayList<String>()
-        var text = String()
+    fun loadCrossword(boardName: Int) {
 
         try {
 
-            val xpp = getResources().getXml(R.xml.crosswords) as XmlPullParser
+            val words = ArrayList<String>()
+            val hints = ArrayList<String>()
+            val characters = ArrayList<String>()
+            var text = String()
+
+            val xpp = getResources().getXml(boardName)
+
             while (xpp.getEventType() != XmlPullParser.END_DOCUMENT) {
 
                 if (xpp.getEventType() == XmlPullParser.TEXT) {
@@ -195,19 +220,34 @@ class MainActivity : AppCompatActivity() {
     /*
         Set crossword board on start of game
      */
-    fun setboard() {
-        try {
-            var index = 0
-            for(character in Crossword.getCharacters()) {
-                if (character == "") {
-                    val id = getResourceId("editText"+index)
-                    val color = resources.getColor(R.color.black)
-                    findViewById<EditText>(id).setBackgroundColor(color)
-                }
-                index++
+//    fun setboard() {
+//        try {
+//            var index = 0
+//            for(character in Crossword.getCharacters()) {
+//                if (character == "") {
+//                    val id = getResourceId("editText"+index)
+//                    val color = resources.getColor(R.color.black)
+//                    findViewById<EditText>(id).setBackgroundColor(color)
+//                }
+//                index++
+//            }
+//        } catch (ex: Exception) {
+//            Log.e("setBoard", ex.printStackTrace().toString())
+//        }
+//    }
+
+
+    /*
+        reveal the current word
+     */
+    fun revealWord() {
+        val characters = Crossword.getCharacters()
+        val activeCells = Crossword.getActiveCells()
+
+        for(cell in activeCells) {
+            if(characters[cell] != "") {
+                findViewById<EditText>(getResourceId("editText$cell")).text = Editable.Factory.getInstance().newEditable(characters[cell])
             }
-        } catch (ex: Exception) {
-            Log.e("setBoard", ex.printStackTrace().toString())
         }
     }
 
@@ -216,15 +256,37 @@ class MainActivity : AppCompatActivity() {
      */
     fun revealAll() {
         try {
-            var index = 0
+            var cell = 0
             for(character in  Crossword.getCharacters()) {
-                val id = getResourceId("editText"+index)
-                findViewById<EditText>(id).setText(character)
-                index++
+                findViewById<EditText>(getResourceId("editText$cell")).text = Editable.Factory.getInstance().newEditable(character)
+                cell++
             }
         }
         catch(ex: Exception) {
             Log.e("Reveal", ex.printStackTrace().toString())
+        }
+    }
+
+    /*
+        check the current word
+    */
+    fun checkWord(user: Boolean = false) {
+        val characters = Crossword.getCharacters()
+        val activeCells = Crossword.getActiveCells()
+
+        var isCorrect = true
+
+        for(cell in activeCells) {
+            val editText = findViewById<EditText>(getResourceId("editText$cell"))
+            if(characters[cell] != editText.text.toString()) {
+                isCorrect = false
+                if (user == true)
+                    editText.setTextColor(resources.getColor(R.color.colorAccent))
+            }
+        }
+
+        if(isCorrect == true) {
+            highlightLineComplete()
         }
     }
 
@@ -252,22 +314,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
-        show popup upon game completion
-     */
-    fun showPopup() {
-
-        val myDialog: Dialog = Dialog(this)
-
-        try {
-            myDialog.setContentView(R.layout.gameover_popup)
-            myDialog.show()
-        }
-        catch(ex: Exception) {
-            Log.e("PopUp", ex.printStackTrace().toString())
-        }
-    }
-
-    /*
         show hint in the bottom hint box
      */
     fun showHint(wordIndex: Int, orientation: String) {
@@ -287,6 +333,46 @@ class MainActivity : AppCompatActivity() {
         gd.setColor(color)
 //        gd.setPadding(10, 10, 10, 10)
         return gd
+    }
+
+    /*
+        on click listeners on custom keyboard keys
+     */
+    fun setOnClickListeners() {
+        findViewById<Button>(R.id.btnKeyA).setOnClickListener{changeText("A")}
+        findViewById<Button>(R.id.btnKeyB).setOnClickListener{changeText("B")}
+        findViewById<Button>(R.id.btnKeyC).setOnClickListener{changeText("C")}
+        findViewById<Button>(R.id.btnKeyD).setOnClickListener{changeText("D")}
+        findViewById<Button>(R.id.btnKeyE).setOnClickListener{changeText("E")}
+        findViewById<Button>(R.id.btnKeyF).setOnClickListener{changeText("F")}
+        findViewById<Button>(R.id.btnKeyG).setOnClickListener{changeText("G")}
+        findViewById<Button>(R.id.btnKeyH).setOnClickListener{changeText("H")}
+        findViewById<Button>(R.id.btnKeyI).setOnClickListener{changeText("I")}
+        findViewById<Button>(R.id.btnKeyJ).setOnClickListener{changeText("J")}
+        findViewById<Button>(R.id.btnKeyK).setOnClickListener{changeText("K")}
+        findViewById<Button>(R.id.btnKeyL).setOnClickListener{changeText("L")}
+        findViewById<Button>(R.id.btnKeyM).setOnClickListener{changeText("M")}
+        findViewById<Button>(R.id.btnKeyN).setOnClickListener{changeText("N")}
+        findViewById<Button>(R.id.btnKeyO).setOnClickListener{changeText("O")}
+        findViewById<Button>(R.id.btnKeyP).setOnClickListener{changeText("P")}
+        findViewById<Button>(R.id.btnKeyQ).setOnClickListener{changeText("Q")}
+        findViewById<Button>(R.id.btnKeyR).setOnClickListener{changeText("R")}
+        findViewById<Button>(R.id.btnKeyS).setOnClickListener{changeText("S")}
+        findViewById<Button>(R.id.btnKeyT).setOnClickListener{changeText("T")}
+        findViewById<Button>(R.id.btnKeyU).setOnClickListener{changeText("U")}
+        findViewById<Button>(R.id.btnKeyV).setOnClickListener{changeText("V")}
+        findViewById<Button>(R.id.btnKeyW).setOnClickListener{changeText("W")}
+        findViewById<Button>(R.id.btnKeyX).setOnClickListener{changeText("X")}
+        findViewById<Button>(R.id.btnKeyY).setOnClickListener{changeText("Y")}
+        findViewById<Button>(R.id.btnKeyZ).setOnClickListener{changeText("Z")}
+        findViewById<Button>(R.id.btnKeyDEL).setOnClickListener{changeText("")}
+    }
+
+    /*
+        change text of active box
+     */
+    fun changeText(character:  String) {
+        findViewById<EditText>(getResourceId("editText$activeBox")).text = Editable.Factory.getInstance().newEditable(character)
     }
 
     /*
@@ -321,6 +407,45 @@ class MainActivity : AppCompatActivity() {
             "editText23" -> return R.id.editText23
             "editText24" -> return R.id.editText24
             else -> return 0
+        }
+    }
+
+    /*
+        setup gameover popup
+     */
+    private fun setupPopupGO() {
+
+        try {
+            myDialog = Dialog(this)
+            myDialog.setContentView(R.layout.gameover_popup)
+
+            findViewById<Button>(R.id.buttonGO).setOnClickListener {
+                val intent = Intent(this, HomePageActivity::class.java)
+                startActivity(intent)
+            }
+
+            findViewById<Button>(R.id.buttonGOCross).setOnClickListener {
+                myDialog.hide()
+            }
+        }catch(ex: Exception) {
+            Log.e("MainActivity", "error setting up gameover dialog ${ex.printStackTrace()}")
+        }
+
+    }
+
+    /*
+    show popup upon game completion
+ */
+    fun showPopup() {
+
+//        val myDialog: Dialog = Dialog(this)
+
+        try {
+//            myDialog.setContentView(R.layout.gameover_popup)
+            myDialog.show()
+        }
+        catch(ex: Exception) {
+            Log.e("MainActivity", " error showing gameover popup ${ex.printStackTrace()}")
         }
     }
 }

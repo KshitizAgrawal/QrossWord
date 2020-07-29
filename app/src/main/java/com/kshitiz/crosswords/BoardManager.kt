@@ -1,5 +1,8 @@
 package com.kshitiz.crosswords
 
-class BoardManager {
+import android.content.Context
 
+class BoardManager(context: Context) {
+
+    var activeBox: Int = 0
 }
