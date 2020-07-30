@@ -14,6 +14,46 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.20">
+
+        <TextView
+            android:id="@+id/textViewSummaryBoard"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Dive deep into the boxes of QrossWord"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txtViewClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:text="00:00"/>
+        <Button
+            android:id="@+id/btnClue"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/btnCheck"
+            android:text="Clue"/>
+        <Button
+            android:id="@+id/btnCheck"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/btnReveal"
+            android:text="Check"/>
+        <Button
+            android:id="@+id/btnReveal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:text="Reveal"/>
+
     </RelativeLayout>
 
     <TableLayout

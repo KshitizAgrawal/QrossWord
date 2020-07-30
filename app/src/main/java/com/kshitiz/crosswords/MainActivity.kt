@@ -14,22 +14,56 @@ import android.view.View.OnFocusChangeListener
 import android.widget.*
 import java.lang.Exception
 import org.xmlpull.v1.XmlPullParser
-
+import androidx.core.os.HandlerCompat.postDelayed
+import android.widget.TextView
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.os.Handler
 
 
 class MainActivity : AppCompatActivity() {
 
+    private var pack: String? = "daily"
+    private var packLevel: Int = 0
+
     private var activeBox: Int = 0
+    private var finalTime: String = "00:00"
+    private var finalScore: Int = 0
     private lateinit var myDialog: Dialog
+
+    lateinit var timerTextView: TextView
+    var startTime: Long = 0
+
+    //runs without a timer by reposting this handler at the end of the runnable
+    var timerHandler = Handler()
+    var timerRunnable: Runnable = object : Runnable {
+
+        override fun run() {
+            val millis = System.currentTimeMillis() - startTime
+            var seconds = (millis / 1000).toInt()
+            val minutes = seconds / 60
+            seconds = seconds % 60
+
+            timerTextView.text = String.format("%d:%02d", minutes, seconds)
+
+            timerHandler.postDelayed(this, 500)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         try {
-            loadCrossword(intent.getIntExtra("boardName", R.xml.crosswords))
+            pack = intent.getStringExtra("pack")
+            if(pack == "daily")
+                loadCrossword(getResourceId("$pack"))
+            else {
+                packLevel = intent.getIntExtra("packLevel", 0)
+                loadCrossword(getResourceId("$pack$packLevel"))
+            }
             setupBoard()
-            setupPopupGO()
         } catch(ex: Exception) {
             Log.e("MainActivity", "Unable to Start Activity")
         }
@@ -87,11 +121,17 @@ class MainActivity : AppCompatActivity() {
                     }
                     override fun afterTextChanged(p0: Editable?) {
 //                        Toast.makeText(applicationContext,"executed after change made over EditText",Toast.LENGTH_SHORT).show()
-                        if(checkBoardComplete()) showPopup()
+                        if(checkBoardComplete()) {
+                            setupClock("stop")
+                            showPopup()
+                        }
                         checkWord()
                     }
                 })
             }
+
+            timerTextView = findViewById(R.id.txtViewClock)
+            setupClock("start")
             setOnClickListeners()
         }catch (ex: Exception) {
             Log.e("highlightColor", ex.printStackTrace().toString())
@@ -158,9 +198,9 @@ class MainActivity : AppCompatActivity() {
         val activeCells = Crossword.getActiveCells()
         for (cell in activeCells) {
             val editText = findViewById<EditText>(getResourceId("editText$cell"))
-            if(editText.text.toString() != "") {
-                TODO("put complete symbol on background of each cell of the line. Create that symbol")
-            }
+//            if(editText.text.toString() != "") {
+//                TODO("put complete symbol on background of each cell of the line. Create that symbol")
+//            }
         }
         Toast.makeText(applicationContext,"This word is correct",Toast.LENGTH_SHORT).show()
     }
@@ -216,26 +256,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-    /*
-        Set crossword board on start of game
-     */
-//    fun setboard() {
-//        try {
-//            var index = 0
-//            for(character in Crossword.getCharacters()) {
-//                if (character == "") {
-//                    val id = getResourceId("editText"+index)
-//                    val color = resources.getColor(R.color.black)
-//                    findViewById<EditText>(id).setBackgroundColor(color)
-//                }
-//                index++
-//            }
-//        } catch (ex: Exception) {
-//            Log.e("setBoard", ex.printStackTrace().toString())
-//        }
-//    }
-
 
     /*
         reveal the current word
@@ -339,6 +359,11 @@ class MainActivity : AppCompatActivity() {
         on click listeners on custom keyboard keys
      */
     fun setOnClickListeners() {
+
+//        findViewById<Button>(R.id.btnClue).setOnClickListener{TODO("implement clues for each word")}
+        findViewById<Button>(R.id.btnCheck).setOnClickListener{checkWord(true)}
+        findViewById<Button>(R.id.btnReveal).setOnClickListener{revealWord()}
+
         findViewById<Button>(R.id.btnKeyA).setOnClickListener{changeText("A")}
         findViewById<Button>(R.id.btnKeyB).setOnClickListener{changeText("B")}
         findViewById<Button>(R.id.btnKeyC).setOnClickListener{changeText("C")}
@@ -376,6 +401,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
+        setup clock on the board
+     */
+    fun setupClock(action: String) {
+        if(action == "start") {
+            startTime = System.currentTimeMillis();
+            timerHandler.postDelayed(timerRunnable, 0);
+        }
+        else {
+            timerHandler.removeCallbacks(timerRunnable);
+        }
+    }
+
+    /*
         get editText resource id from their names
      */
     fun getResourceId(res: String): Int{
@@ -406,43 +444,62 @@ class MainActivity : AppCompatActivity() {
             "editText22" -> return R.id.editText22
             "editText23" -> return R.id.editText23
             "editText24" -> return R.id.editText24
+            "daily" -> return R.xml.crosswords
+            "tourist1"-> return R.xml.tourist1
+            "tourist2"-> return R.xml.tourist2
+            "tourist3"-> return R.xml.tourist3
+            "tourist4"-> return R.xml.tourist4
+            "tourist5"-> return R.xml.tourist5
+            "tourist6"-> return R.xml.tourist6
+            "tourist7"-> return R.xml.tourist7
             else -> return 0
         }
     }
 
     /*
-        setup gameover popup
+        calculate score of current session
      */
-    private fun setupPopupGO() {
+    private fun calScore(): Int {
+        val threeLetter = 2
+        val fourLetter = 4
+        val fiveLetter = 4
+        return (threeLetter)*5+(fourLetter*10)+(fiveLetter*15)
+    }
 
+    /*
+        show popup upon game completion
+    */
+    fun showPopup() {
         try {
+
+            finalTime = timerTextView.text.toString()
+            finalScore = calScore()
             myDialog = Dialog(this)
             myDialog.setContentView(R.layout.gameover_popup)
+            myDialog.show()
 
-            findViewById<Button>(R.id.buttonGO).setOnClickListener {
+            myDialog.findViewById<TextView>(R.id.txtViewYourTime).text = Editable.Factory.getInstance().newEditable("Your Time : $finalTime")
+            myDialog.findViewById<TextView>(R.id.txtViewYourScore).text = Editable.Factory.getInstance().newEditable("Your Score : $finalScore")
+
+            myDialog.findViewById<Button>(R.id.btnGoHome).setOnClickListener {
                 val intent = Intent(this, HomePageActivity::class.java)
                 startActivity(intent)
             }
 
-            findViewById<Button>(R.id.buttonGOCross).setOnClickListener {
+            myDialog.findViewById<Button>(R.id.buttonGOCross).setOnClickListener {
                 myDialog.hide()
             }
-        }catch(ex: Exception) {
-            Log.e("MainActivity", "error setting up gameover dialog ${ex.printStackTrace()}")
-        }
 
-    }
-
-    /*
-    show popup upon game completion
- */
-    fun showPopup() {
-
-//        val myDialog: Dialog = Dialog(this)
-
-        try {
-//            myDialog.setContentView(R.layout.gameover_popup)
-            myDialog.show()
+            if (pack != "daily" && packLevel != 7) {
+                val btnChangeBoard = myDialog.findViewById<Button>(R.id.btnChangeBoard)
+                btnChangeBoard.visibility = View.VISIBLE
+                btnChangeBoard.setOnClickListener{
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("pack", "tourist")
+                    intent.putExtra("packLevel", packLevel+1)
+                    startActivity(intent)
+                }
+            }
         }
         catch(ex: Exception) {
             Log.e("MainActivity", " error showing gameover popup ${ex.printStackTrace()}")

@@ -1,41 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC107">
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/buttonGOCross"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:text="@string/button_GOCross"
         android:textAlignment="center"
         android:textSize="26sp"
-        android:textStyle="bold"
-        android:background="#FFC107"/>
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical">
+
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/txtViewYourTime"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/textview_GOPopup"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/txtViewYourTime"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txtViewYourScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/txtViewYourScore"
             android:textAlignment="center"
             android:textSize="26sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/buttonGO"
+            android:id="@+id/btnGoHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_GOPopup"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/btnGoHome"
             android:textAlignment="center"
             android:textSize="26sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btnChangeBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/btnChangeGame"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </RelativeLayout>

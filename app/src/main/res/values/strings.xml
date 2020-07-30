@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">CrossWords</string>
-    <string name="button_GOPopup">Main Menu</string>
+
+    <string name="txtViewYourTime">Your Time : 00:00</string>
+    <string name="txtViewYourScore">Your Score : 000</string>
     <string name="button_GOCross">X</string>
-    <string name="textview_GOPopup">GAMEOVER</string>
+    <string name="textviewGO">GAMEOVER</string>
+    <string name="btnGoHome">Main Menu</string>
+    <string name="btnChangeGame">Next Game</string>
 </resources>

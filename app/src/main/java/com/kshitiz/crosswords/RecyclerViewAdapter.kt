@@ -73,14 +73,21 @@ class RecyclerViewAdapter(val context: Context, var list: ArrayList<Data>) :
     private fun changeActivity(position: Int) {
         val intent = Intent(context, MainActivity::class.java)
         when(position) {
-            0-> {intent.putExtra("boardName", R.xml.tourist1)}
-            1-> {intent.putExtra("boardName", R.xml.tourist2)}
-            2-> {intent.putExtra("boardName", R.xml.tourist3)}
-            3-> {intent.putExtra("boardName", R.xml.tourist4)}
-            4-> {intent.putExtra("boardName", R.xml.tourist5)}
-            5-> {intent.putExtra("boardName", R.xml.tourist6)}
-            6-> {intent.putExtra("boardName", R.xml.tourist7)}
-            else-> {intent.putExtra("boardName", R.xml.crosswords)}
+            0-> {intent.putExtra("pack", "tourist")
+                intent.putExtra("packLevel", 1)}
+            1-> {intent.putExtra("pack", "tourist")
+                intent.putExtra("packLevel", 2)}
+            2-> {intent.putExtra("pack", "tourist")
+                intent.putExtra("packLevel", 3)}
+            3-> {intent.putExtra("pack", "tourist")
+                intent.putExtra("packLevel", 4)}
+            4-> {intent.putExtra("pack", "tourist")
+                intent.putExtra("packLevel", 5)}
+            5-> {intent.putExtra("pack", "tourist")
+                intent.putExtra("packLevel", 6)}
+            6-> {intent.putExtra("pack", "tourist")
+                intent.putExtra("packLevel", 7)}
+            else-> {intent.putExtra("pack", "daily")}
         }
         context.startActivity(intent)
     }

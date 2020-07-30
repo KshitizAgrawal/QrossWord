@@ -107,7 +107,7 @@ class HomePageActivity : AppCompatActivity() {
         when(targetActivity) {
             "daily" -> {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("boardName", R.xml.crosswords)
+                intent.putExtra("pack", "daily")
                 startActivity(intent)
             }
             "series" -> {
