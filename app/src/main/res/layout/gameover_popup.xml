@@ -9,6 +9,8 @@
         android:id="@+id/buttonGOCross"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:background="@color/colorPrimary"
         android:text="@string/button_GOCross"
         android:textAlignment="center"

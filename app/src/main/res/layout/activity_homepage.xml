@@ -4,83 +4,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayoutHomepage1"
-        android:layout_height="48dp"
+    <LinearLayout
+        android:id="@+id/linearLayoutHomepage1"
         android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
-        android:background="@color/black">
-
-        <ImageButton
-            android:id="@+id/imgbtnHomepageLeftPane"
-            android:layout_width="60sp"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:contentDescription="button for left pane list view"
-            android:scaleType="fitXY"
-            android:src="@drawable/button_listview" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_toEndOf="@+id/imgbtnHomepageLeftPane"
-            android:text="QrossWord"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="32sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayoutHomepage2"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@+id/relativeLayoutHomepage1">
+        android:background="@color/colorPrimary">
 
         <Button
             android:id="@+id/btnHomepageFeatured"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:text="Featured"
+            android:layout_weight="0.3"
+            android:text="@string/btnHomePageFeatured"
             android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:background="@color/black"/>
-
-        <Button
-            android:id="@+id/btnHomepageStatistics"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:text="Statistics"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:background="@color/black"/>
+            android:textColor="@color/black"
+            android:background="@color/colorPrimary"/>
 
         <Button
             android:id="@+id/btnHomepagePacks"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_toEndOf="@id/btnHomepageFeatured"
-            android:layout_toStartOf="@id/btnHomepageStatistics"
-            android:text="Packs"
+            android:layout_weight="0.3"
+            android:text="@string/btnHomepagePacks"
             android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:background="@color/black"/>
-    </RelativeLayout>
+            android:textColor="@color/black"
+            android:background="@color/colorPrimary"/>
+
+        <Button
+            android:id="@+id/btnHomepageStatistics"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:text="@string/btnHomePageStatistics"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutHomepage1"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/relativeLayoutHomepage2">
+        android:layout_below="@id/linearLayoutHomepage1">
 
         <RelativeLayout
-            android:id="@+id/relativeLayoutHomepage3"
+            android:id="@+id/relativeLayoutHomepage1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -89,24 +59,27 @@
 
             <ImageButton
                 android:id="@+id/imgbtnDailyCW"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="200dp"
                 android:layout_centerVertical="true"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:contentDescription="button for daily crossword"
+                android:paddingTop="70dp"
+                android:paddingBottom="70dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:contentDescription="@string/imgbtnDailyCW"
                 android:src="@drawable/img_crossword_mini"
                 android:scaleType="fitXY"
                 android:background="@color/white"/>
 
             <TextView
+                android:id="@+id/txtViewHomeDailyCW"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/imgbtnDailyCW"
                 android:layout_centerVertical="true"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:text="Journey to Europe"
+                android:text="@string/txtViewHomeDailyCW"
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
@@ -114,50 +87,74 @@
 
         <ImageButton
             android:id="@+id/imgbtnFreePack1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutHomepage3"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutHomepage1"
             app:layout_constraintBottom_toTopOf="@+id/imgbtnFreePack3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgbtnFreePack2"
-            android:contentDescription="Special free pack 1"
-            android:src="@drawable/img_cw_freepack1"
+            android:layout_centerVertical="true"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:contentDescription="@string/imgbtnDailyCW"
+            android:src="@drawable/img_crossword_mini"
+            android:scaleType="fitXY"
             android:background="@color/white"/>
 
         <ImageButton
             android:id="@+id/imgbtnFreePack2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutHomepage3"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutHomepage1"
             app:layout_constraintBottom_toTopOf="@+id/imgbtnFreePack4"
             app:layout_constraintStart_toEndOf="@+id/imgbtnFreePack1"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="Special free pack 2"
-            android:src="@drawable/img_cw_freepack2"
+            android:layout_centerVertical="true"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:contentDescription="@string/imgbtnDailyCW"
+            android:src="@drawable/img_crossword_mini"
+            android:scaleType="fitXY"
             android:background="@color/white"/>
 
         <ImageButton
             android:id="@+id/imgbtnFreePack3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             app:layout_constraintTop_toBottomOf="@+id/imgbtnFreePack1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgbtnFreePack4"
-            android:contentDescription="Special free pack 3"
-            android:src="@drawable/img_cw_freepack3"
+            android:layout_centerVertical="true"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:contentDescription="@string/imgbtnDailyCW"
+            android:src="@drawable/img_crossword_mini"
+            android:scaleType="fitXY"
             android:background="@color/white"/>
 
         <ImageButton
             android:id="@+id/imgbtnFreePack4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             app:layout_constraintTop_toBottomOf="@+id/imgbtnFreePack2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgbtnFreePack3"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="Special free pack 4"
-            android:src="@drawable/img_cw_freepack4"
+            android:layout_centerVertical="true"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:contentDescription="@string/imgbtnDailyCW"
+            android:src="@drawable/img_crossword_mini"
+            android:scaleType="fitXY"
             android:background="@color/white"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -166,18 +163,19 @@
         android:id="@+id/constraintLayoutHomepage2"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/relativeLayoutHomepage2"
+        android:layout_below="@id/linearLayoutHomepage1"
         android:layout_alignParentBottom="true"
         android:background="@color/lightBlue"
         android:visibility="invisible" >
         <TextView
+            android:id="@+id/txtViewPacks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="Coming Soon"
+            android:text="@string/txtViewPacks"
             android:textSize="48sp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -185,18 +183,19 @@
         android:id="@+id/constraintLayoutHomepage3"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/relativeLayoutHomepage2"
+        android:layout_below="@id/linearLayoutHomepage1"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         android:visibility="invisible" >
         <TextView
+            android:id="@+id/txtViewStatistics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="Coming Soon"
+            android:text="@string/txtViewStatistics"
             android:textSize="48sp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

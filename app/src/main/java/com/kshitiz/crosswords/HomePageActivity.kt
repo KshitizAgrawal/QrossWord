@@ -16,7 +16,6 @@ class HomePageActivity : AppCompatActivity() {
     private lateinit var btnStatistics: Button
     private lateinit var btnPacks: Button
 
-    private lateinit var imgbtnLeftPane: ImageButton
     private lateinit var imgbtnDailyCW: ImageButton
     private lateinit var imgbtnFreePack1: ImageButton
     private lateinit var imgbtnFreePack2: ImageButton
@@ -40,6 +39,13 @@ class HomePageActivity : AppCompatActivity() {
     }
 
     /*
+        show exit popup on back button press
+    */
+//    override fun onBackPressed() {
+//        System.exit(0);
+//    }
+
+    /*
         declare the buttons for attaching listeners
         declare layout for changing visibility
      */
@@ -48,7 +54,6 @@ class HomePageActivity : AppCompatActivity() {
         btnStatistics = findViewById(R.id.btnHomepageStatistics)
         btnPacks = findViewById(R.id.btnHomepagePacks)
 
-        imgbtnLeftPane = findViewById(R.id.imgbtnHomepageLeftPane)
         imgbtnDailyCW = findViewById(R.id.imgbtnDailyCW)
         imgbtnFreePack1 = findViewById(R.id.imgbtnFreePack1)
         imgbtnFreePack2 = findViewById(R.id.imgbtnFreePack2)
@@ -69,8 +74,6 @@ class HomePageActivity : AppCompatActivity() {
         btnFeatured.setOnClickListener {changeVisibility("featured")}
         btnStatistics.setOnClickListener {changeVisibility("statistics")}
         btnPacks.setOnClickListener{changeVisibility("packs")}
-
-        imgbtnLeftPane.setOnClickListener{Toast.makeText(applicationContext, "Left Pane does not exists", Toast.LENGTH_LONG).show()}
 
         imgbtnDailyCW.setOnClickListener{changeActivity("daily")}
         imgbtnFreePack1.setOnClickListener{changeActivity("series")}

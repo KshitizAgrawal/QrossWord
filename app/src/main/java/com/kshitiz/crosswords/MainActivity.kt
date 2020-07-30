@@ -14,11 +14,7 @@ import android.view.View.OnFocusChangeListener
 import android.widget.*
 import java.lang.Exception
 import org.xmlpull.v1.XmlPullParser
-import androidx.core.os.HandlerCompat.postDelayed
 import android.widget.TextView
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Handler
 
 
@@ -30,7 +26,6 @@ class MainActivity : AppCompatActivity() {
     private var activeBox: Int = 0
     private var finalTime: String = "00:00"
     private var finalScore: Int = 0
-    private lateinit var myDialog: Dialog
 
     lateinit var timerTextView: TextView
     var startTime: Long = 0
@@ -66,6 +61,20 @@ class MainActivity : AppCompatActivity() {
             setupBoard()
         } catch(ex: Exception) {
             Log.e("MainActivity", "Unable to Start Activity")
+        }
+    }
+
+    /*
+        go to either homepage or pack selection page on back press button
+     */
+    override fun onBackPressed() {
+        if(pack == "daily") {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
+        else {
+            val intent = Intent(this, CrossWordSeriesActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -121,6 +130,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     override fun afterTextChanged(p0: Editable?) {
 //                        Toast.makeText(applicationContext,"executed after change made over EditText",Toast.LENGTH_SHORT).show()
+                        editText.setTextColor(resources.getColor(R.color.black))
                         if(checkBoardComplete()) {
                             setupClock("stop")
                             showPopup()
@@ -152,7 +162,7 @@ class MainActivity : AppCompatActivity() {
 
             for(cell in active_cells) {
                 if(characters[cell] != "" && cell!=index) {
-                    findViewById<EditText>(getResourceId("editText"+cell)).background = getDrawable(R.drawable.cw_box_border)
+                    findViewById<EditText>(getResourceId("editText"+cell)).background = getDrawable(R.drawable.cell_rect_border)
                 }
             }
 
@@ -172,7 +182,7 @@ class MainActivity : AppCompatActivity() {
 
             for(cell in active_cells) {
                 if(characters[cell] != "" && cell!=index) {
-                    findViewById<EditText>(getResourceId("editText"+cell)).background = getDrawable(R.drawable.cw_box_border)
+                    findViewById<EditText>(getResourceId("editText"+cell)).background = getDrawable(R.drawable.cell_rect_border)
                 }
             }
 
@@ -198,9 +208,9 @@ class MainActivity : AppCompatActivity() {
         val activeCells = Crossword.getActiveCells()
         for (cell in activeCells) {
             val editText = findViewById<EditText>(getResourceId("editText$cell"))
-//            if(editText.text.toString() != "") {
-//                TODO("put complete symbol on background of each cell of the line. Create that symbol")
-//            }
+            if(editText.text.toString() != "") {
+                editText.background = getDrawable(R.drawable.cell_circular_background)
+            }
         }
         Toast.makeText(applicationContext,"This word is correct",Toast.LENGTH_SHORT).show()
     }
@@ -300,7 +310,7 @@ class MainActivity : AppCompatActivity() {
             val editText = findViewById<EditText>(getResourceId("editText$cell"))
             if(characters[cell] != editText.text.toString()) {
                 isCorrect = false
-                if (user == true)
+                if (user == true && "" != editText.text.toString())
                     editText.setTextColor(resources.getColor(R.color.colorAccent))
             }
         }
@@ -474,7 +484,8 @@ class MainActivity : AppCompatActivity() {
 
             finalTime = timerTextView.text.toString()
             finalScore = calScore()
-            myDialog = Dialog(this)
+
+            val myDialog = Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen)
             myDialog.setContentView(R.layout.gameover_popup)
             myDialog.show()
 

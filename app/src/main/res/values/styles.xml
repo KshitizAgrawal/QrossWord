@@ -14,7 +14,7 @@
         <item name="android:ems">10</item>
         <item name="android:textAlignment">center</item>
         <item name="android:inputType">textCapCharacters</item>
-        <item name="android:background">@drawable/cw_box_border</item>
+        <item name="android:background">@drawable/cell_rect_border</item>
     </style>
 
 </resources>

@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">CrossWords</string>
 
+    <string name="btnHomePageFeatured">Featured</string>
+    <string name="btnHomepagePacks">Packs</string>
+    <string name="btnHomePageStatistics">Statistics</string>
+    <string name="imgbtnDailyCW">open daily crossword</string>
+    <string name="txtViewHomeDailyCW">Journey to Europe</string>
+    <string name="imgbtnFreePack1">Special free pack 1</string>
+    <string name="imgbtnFreePack2">Special free pack 2</string>
+    <string name="imgbtnFreePack3">Special free pack 3</string>
+    <string name="imgbtnFreePack4">Special free pack 4</string>
+    <string name="txtViewPacks">Coming Soon</string>
+    <string name="txtViewStatistics">Coming Soon</string>
+
+    <string name="txtViewPackLevel">Pack Level</string>
+
     <string name="txtViewYourTime">Your Time : 00:00</string>
     <string name="txtViewYourScore">Your Score : 000</string>
     <string name="button_GOCross">X</string>

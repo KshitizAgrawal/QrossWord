@@ -1,6 +1,7 @@
 package com.kshitiz.crosswords
 
 import RecyclerViewAdapter
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,14 @@ class CrossWordSeriesActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
+    }
+
+    /*
+        go to either homepage on back press button
+    */
+    override fun onBackPressed() {
+        val intent = Intent(this, HomePageActivity::class.java)
+        startActivity(intent)
     }
 
 }
